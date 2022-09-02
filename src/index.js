@@ -6,16 +6,7 @@ import Navbar from "./components/navbar";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.Fragment>
-    <Navbar>
-      <form class="form-inline">
-        <button class="btn btn-outline-success" type="button">
-          Main button
-        </button>
-        <button class="btn btn-sm btn-outline-secondary" type="button">
-          Smaller button
-        </button>
-      </form>
-    </Navbar>
+    <Navbar></Navbar>
     <App />
   </React.Fragment>
 );
