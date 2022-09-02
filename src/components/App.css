@@ -1,0 +1,10 @@
+.visualiserContainer {
+  position: absolute;
+  left: 100px;
+}
+.visualiserArray {
+  width: 2px;
+  background-color: pink;
+  display: inline-block;
+  margin: 0 1px;
+}
