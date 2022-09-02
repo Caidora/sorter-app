@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-
+import BubbleSort from "./BubbleSort";
 import Navbar from "./navbar";
 class App extends Component {
   constructor(props) {
@@ -51,10 +51,18 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar resetButton={this.createArray}></Navbar>
+        <Navbar
+          resetButton={this.createArray}
+          bubbleButton={() => this.bubbleSort()}
+        ></Navbar>
         <div className="visualiserContainer">{this.renderArray()}</div>
       </React.Fragment>
     );
+  }
+  bubbleSort() {
+    let sortedList = [];
+    sortedList = BubbleSort(this);
+    this.setState({ unsortedList: sortedList });
   }
 }
 function getRandom(min, max) {

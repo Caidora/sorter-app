@@ -12,7 +12,11 @@ class NavBar extends Component {
           >
             Reset Array
           </button>
-          <button className="btn btn-outline-success" type="button">
+          <button
+            onClick={this.props.bubbleButton}
+            className="btn btn-outline-success"
+            type="button"
+          >
             BubbleSort
           </button>
           <button className="btn btn-outline-success" type="button">
