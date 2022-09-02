@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import BubbleSort from "./BubbleSort";
 import Navbar from "./navbar";
 class App extends Component {
   constructor(props) {
@@ -53,16 +52,35 @@ class App extends Component {
       <React.Fragment>
         <Navbar
           resetButton={this.createArray}
-          bubbleButton={() => this.bubbleSort()}
+          bubbleButton={() => this.BubbleSort()}
         ></Navbar>
         <div className="visualiserContainer">{this.renderArray()}</div>
       </React.Fragment>
     );
   }
-  bubbleSort() {
-    let sortedList = [];
-    sortedList = BubbleSort(this);
-    this.setState({ unsortedList: sortedList });
+  BubbleSort() {
+    let barArray = document.getElementsByClassName("visualiserArray");
+    console.log(barArray[100].style.height);
+    for (var i = 0; i < barArray.length; i++) {
+      for (var j = 0; j < barArray.length - i - 1; j++) {
+        const jval = parseInt(barArray[j].style.height);
+        const j2val = parseInt(barArray[j + 1].style.height);
+        setTimeout(() => {
+          barArray[j].style.backgroundColor = "blue";
+          barArray[j + 1].style.backgroundColor = "blue";
+        }, i * 3);
+        if (jval > j2val) {
+          var temp = jval + "px";
+          barArray[j].style.height = j2val + "px";
+          barArray[j + 1].style.height = temp;
+        }
+
+        setTimeout(() => {
+          barArray[j].style.backgroundColor = "pink";
+          barArray[j + 1].style.backgroundColor = "pink";
+        }, i * 3);
+      }
+    }
   }
 }
 function getRandom(min, max) {
