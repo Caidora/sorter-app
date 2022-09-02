@@ -12,10 +12,10 @@ class App extends Component {
 
   createArray = () => {
     const unsortedList = [];
-    let quantity = window.innerWidth / 5;
+    let quantity = (window.innerWidth - 200) / 4;
 
     for (let i = 0; i < quantity; i++) {
-      unsortedList.push(getRandom(5, window.innerHeight));
+      unsortedList.push(getRandom(5, window.innerHeight - 58));
     }
     this.setState({ unsortedList: unsortedList });
   };

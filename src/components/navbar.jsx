@@ -6,7 +6,7 @@ class NavBar extends Component {
       <nav class="navbar navbar-light bg-light justify-content-between">
         <form>
           <button class="btn btn-outline-success" type="button">
-            Main button
+            Bubble Sort
           </button>
           <button class="btn btn-outline-success" type="button">
             Main button
