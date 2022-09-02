@@ -40,9 +40,11 @@ class App extends Component {
   componentDidMount() {
     this.createArray();
     window.addEventListener("resize", this.updateDimensions);
+    window.addEventListener("resize", this.createArray);
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
+    window.removeEventListener("resize", this.createArray);
   }
   render() {
     return <div className="visualiserContainer">{this.renderArray()}</div>;
