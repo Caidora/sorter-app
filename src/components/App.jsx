@@ -13,7 +13,7 @@ class App extends Component {
 
   createArray = () => {
     const unsortedList = [];
-    let quantity = (this.state.width - 200) / 4;
+    let quantity = this.state.width / 48;
 
     for (let i = 0; i < quantity; i++) {
       unsortedList.push(getRandom(5, this.state.height - 100));
@@ -60,25 +60,30 @@ class App extends Component {
   }
   BubbleSort() {
     let barArray = document.getElementsByClassName("visualiserArray");
-    console.log(barArray[100].style.height);
+    let l = 0;
     for (var i = 0; i < barArray.length; i++) {
       for (var j = 0; j < barArray.length - i - 1; j++) {
-        const jval = parseInt(barArray[j].style.height);
-        const j2val = parseInt(barArray[j + 1].style.height);
+        const barArray = document.getElementsByClassName("visualiserArray");
+        l++;
+        const bar1Style = barArray[j].style;
+        const bar2Style = barArray[j + 1].style;
         setTimeout(() => {
-          barArray[j].style.backgroundColor = "blue";
-          barArray[j + 1].style.backgroundColor = "blue";
-        }, i * 3);
-        if (jval > j2val) {
-          var temp = jval + "px";
-          barArray[j].style.height = j2val + "px";
-          barArray[j + 1].style.height = temp;
-        }
-
+          bar1Style.backgroundColor = "blue";
+          bar2Style.backgroundColor = "blue";
+        }, l * 3);
+        l++;
         setTimeout(() => {
-          barArray[j].style.backgroundColor = "pink";
-          barArray[j + 1].style.backgroundColor = "pink";
-        }, i * 3);
+          if (parseInt(bar1Style.height) > parseInt(bar2Style.height)) {
+            const temp = bar1Style.height;
+            bar1Style.height = bar2Style.height;
+            bar2Style.height = temp;
+          }
+        }, l * 3);
+        l++;
+        setTimeout(() => {
+          bar1Style.backgroundColor = "pink";
+          bar2Style.backgroundColor = "pink";
+        }, l * 3);
       }
     }
   }
