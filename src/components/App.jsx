@@ -3,19 +3,19 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { unsortedList: [] };
+    this.state = {
+      unsortedList: [],
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
   }
-
-  componentDidMount = () => {
-    this.createArray();
-  };
 
   createArray = () => {
     const unsortedList = [];
-    let quantity = (window.innerWidth - 200) / 4;
+    let quantity = (this.state.width - 200) / 4;
 
     for (let i = 0; i < quantity; i++) {
-      unsortedList.push(getRandom(5, window.innerHeight - 58));
+      unsortedList.push(getRandom(5, this.state.height - 58));
     }
     this.setState({ unsortedList: unsortedList });
   };
@@ -27,6 +27,22 @@ class App extends Component {
         style={{ height: number }}
       ></div>
     ));
+  }
+  updateDimensions = () => {
+    let w = window;
+    let width = w.innerWidth;
+    let height = w.innerHeight;
+
+    this.setState({ width: width, height: height });
+    console.log(this.state.width);
+  };
+
+  componentDidMount() {
+    this.createArray();
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
   }
   render() {
     return <div className="visualiserContainer">{this.renderArray()}</div>;
