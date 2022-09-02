@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
+
+import Navbar from "./navbar";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class App extends Component {
     let quantity = (this.state.width - 200) / 4;
 
     for (let i = 0; i < quantity; i++) {
-      unsortedList.push(getRandom(5, this.state.height - 58));
+      unsortedList.push(getRandom(5, this.state.height - 100));
     }
     this.setState({ unsortedList: unsortedList });
   };
@@ -47,7 +49,12 @@ class App extends Component {
     window.removeEventListener("resize", this.createArray);
   }
   render() {
-    return <div className="visualiserContainer">{this.renderArray()}</div>;
+    return (
+      <React.Fragment>
+        <Navbar resetButton={this.createArray}></Navbar>
+        <div className="visualiserContainer">{this.renderArray()}</div>
+      </React.Fragment>
+    );
   }
 }
 function getRandom(min, max) {
