@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./navbar";
+const animationSpeed = 3;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -63,27 +64,33 @@ class App extends Component {
     let l = 0;
     for (var i = 0; i < barArray.length; i++) {
       for (var j = 0; j < barArray.length - i - 1; j++) {
+        /* This uses setTimeout to create a delay between all the color and value assignemnts. So while the algorithm happens instantaneously
+        the actual changes are set at an ever increasing timer delay so they happen one after the other */
+
         const barArray = document.getElementsByClassName("visualiserArray");
         l++;
         const bar1Style = barArray[j].style;
         const bar2Style = barArray[j + 1].style;
+        /* Sets the color of the values being compared to blue */
         setTimeout(() => {
           bar1Style.backgroundColor = "blue";
           bar2Style.backgroundColor = "blue";
-        }, l * 3);
+        }, l * animationSpeed);
         l++;
+        /* swaps the values if the left one is larger than the right one*/
         setTimeout(() => {
           if (parseInt(bar1Style.height) > parseInt(bar2Style.height)) {
             const temp = bar1Style.height;
             bar1Style.height = bar2Style.height;
             bar2Style.height = temp;
           }
-        }, l * 3);
+        }, l * animationSpeed);
         l++;
+        /* sets the bars color back to ping */
         setTimeout(() => {
           bar1Style.backgroundColor = "pink";
           bar2Style.backgroundColor = "pink";
-        }, l * 3);
+        }, l * animationSpeed);
       }
     }
   }
