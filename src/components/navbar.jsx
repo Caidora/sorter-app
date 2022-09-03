@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
+import "./App.css";
+
 class NavBar extends Component {
   render() {
     return (
-      <nav className="navbar navbar-light bg-light justify-content-between">
-        <form>
+      <nav className="container navbar navbar-light bg-light  ">
+        <form className="center">
           <button
             onClick={this.props.resetButton}
             className="btn btn-outline-success"

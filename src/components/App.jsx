@@ -4,7 +4,7 @@ import Navbar from "./navbar";
 const animationSpeed = 4;
 const startColor = "rgb(137, 207, 240)";
 const comparisonColor = "darkBlue";
-const quantity = 50;
+const quantity = 25;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -146,6 +146,8 @@ class App extends Component {
         const barArray1 = barArray[j].style;
         const barArray2 = barArray[j - 1].style;
         l++;
+        /* This uses setTimeout to create a delay between all the color and value assignemnts. So while the algorithm happens instantaneously
+        the actual changes are set at an ever increasing timer delay so they happen one after the other */
         questionStartTimers[i][l] = setTimeout(
           swapColor,
           l * animationSpeed,
