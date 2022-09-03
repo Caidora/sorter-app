@@ -133,39 +133,35 @@ class App extends Component {
   }
   insertionSort() {
     let barArray = document.getElementsByClassName("visualiserArray");
-    let l = 0;
+    let l = 1;
     for (let i = 1; i < barArray.length; i++) {
-      let key = barArray[i].style.height;
-      let j = i - 1;
-      while (j >= 0 && parseInt(barArray[j].style.height) > parseInt(key)) {
+      for (let j = i; j > 0; j--) {
+        console.log("lol");
+        const barArray1 = barArray[j].style;
+        const barArray2 = barArray[j - 1].style;
         l++;
-        const bar1Style = barArray[j].style;
-        const bar2Style = barArray[j + 1].style;
         setTimeout(() => {
-          bar1Style.backgroundColor = comparisonColor;
-          bar2Style.backgroundColor = comparisonColor;
+          barArray1.backgroundColor = comparisonColor;
+          barArray2.backgroundColor = comparisonColor;
         }, l * animationSpeed);
         l++;
         setTimeout(() => {
-          bar2Style.height = bar1Style.height;
-        }, l * animationSpeed);
+          if (parseInt(barArray1.height) < parseInt(barArray2.height)) {
+            const temp = barArray1.height;
+            barArray1.height = barArray2.height;
+            barArray2.height = temp;
+          }
+        }, l * 3);
         l++;
         setTimeout(() => {
-          bar1Style.backgroundColor = startColor;
-          bar2Style.backgroundColor = startColor;
+          barArray1.backgroundColor = startColor;
+          barArray2.backgroundColor = startColor;
         }, l * animationSpeed);
-        j--;
       }
-      l++;
-
-      let bar2Style = barArray[j + 1].style;
-      setTimeout(() => {
-        bar2Style.height = key;
-      }, l * animationSpeed);
     }
-    console.log(barArray);
   }
 }
+
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
