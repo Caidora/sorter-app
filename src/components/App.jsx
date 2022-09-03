@@ -31,7 +31,7 @@ class App extends Component {
       unsortedList: unsortedList,
       barWidth: barWidth,
       barMargin: barMargin,
-      startHeight: this.state.height - 100,
+      startHeight: this.state.height,
     });
     console.log(this.state.barWidth);
   };
@@ -41,7 +41,7 @@ class App extends Component {
         className="visualiserArray"
         key={idx}
         style={{
-          height: number * (this.state.height / this.state.startHeight),
+          height: this.state.unsortedList[idx],
           width: this.state.barWidth,
           margin: this.state.barMargin,
           backgroundColor: startColor,
@@ -52,18 +52,27 @@ class App extends Component {
   updateDimensions = () => {
     let w = window;
     let width = w.innerWidth;
+    let startHeight = this.state.height;
     let height = w.innerHeight;
-
+    const UnsortedList = this.state.unsortedList;
     let barMargin = "0 1px";
     let quantity = 25;
     let barWidth = (this.state.width - 200) / quantity;
     barWidth = barWidth - 2;
+    for (let i = 0; i < UnsortedList.length; i++) {
+      UnsortedList[i] =
+        UnsortedList[i] * (this.state.height / this.state.startHeight);
+      console.log(this.state.height / this.state.startHeight);
+    }
 
     this.setState({
       width: width,
       height: height,
       barWidth: barWidth,
       barMargin: barMargin,
+
+      startHeight: startHeight,
+      unsortedList: UnsortedList,
     });
     console.log(this.state.width);
   };
