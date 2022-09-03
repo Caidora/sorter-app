@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./navbar";
-const animationSpeed = 20;
+const animationSpeed = 5;
 const startColor = "rgb(137, 207, 240)";
 const comparisonColor = "darkBlue";
 class App extends Component {
@@ -153,9 +153,11 @@ class App extends Component {
             barArray1.height = barArray2.height;
             barArray2.height = temp;
           } else {
+            barArray1.backgroundColor = startColor;
+            barArray2.backgroundColor = startColor;
             questionStartTimers[i].forEach((timer) => clearTimeout(timer));
           }
-        }, l * 3);
+        }, l * animationSpeed);
         l++;
         questionStartTimers[i][l] = setTimeout(() => {
           barArray1.backgroundColor = startColor;
