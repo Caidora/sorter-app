@@ -1,7 +1,8 @@
 .visualiserContainer {
   left: 100px;
+  bottom: 0;
 
-  position: relative;
+  position: fixed;
 }
 .visualiserArray {
   width: 10px;

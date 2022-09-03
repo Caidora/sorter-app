@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       unsortedList: [],
       width: window.innerWidth,
-      height: window.innerHeight,
+      height: window.innerHeight - 10,
       barMargin: 0,
       barWidth: 0,
       startHeight: 0,
@@ -53,7 +53,7 @@ class App extends Component {
     let w = window;
     let width = w.innerWidth;
     let startHeight = this.state.height;
-    let height = w.innerHeight;
+    let height = w.innerHeight - 10;
     const UnsortedList = this.state.unsortedList;
     let barMargin = "0 1px";
     let quantity = 25;
