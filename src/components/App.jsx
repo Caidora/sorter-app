@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./navbar";
 const animationSpeed = 3;
-const babyBlue = "rgb(137, 207, 240)";
+const startColor = "rgb(137, 207, 240)";
+const comparisonColor = "darkBlue";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +41,7 @@ class App extends Component {
           height: number,
           width: this.state.barWidth,
           margin: this.state.barMargin,
-          backgroundColor: babyBlue,
+          backgroundColor: startColor,
         }}
       ></div>
     ));
@@ -88,8 +89,8 @@ class App extends Component {
         const bar2Style = barArray[j + 1].style;
         /* Sets the color of the values being compared to blue */
         setTimeout(() => {
-          bar1Style.backgroundColor = "darkBlue";
-          bar2Style.backgroundColor = "darkBlue";
+          bar1Style.backgroundColor = comparisonColor;
+          bar2Style.backgroundColor = comparisonColor;
         }, l * animationSpeed);
         l++;
         /* swaps the values if the left one is larger than the right one*/
@@ -103,8 +104,8 @@ class App extends Component {
         l++;
         /* sets the bars color back to ping */
         setTimeout(() => {
-          bar1Style.backgroundColor = babyBlue;
-          bar2Style.backgroundColor = babyBlue;
+          bar1Style.backgroundColor = startColor;
+          bar2Style.backgroundColor = startColor;
         }, l * animationSpeed);
       }
     }
