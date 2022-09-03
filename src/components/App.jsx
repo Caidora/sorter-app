@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./navbar";
 const animationSpeed = 3;
+const babyBlue = "rgb(137, 207, 240)";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -9,24 +10,38 @@ class App extends Component {
       unsortedList: [],
       width: window.innerWidth,
       height: window.innerHeight,
+      barMargin: 0,
+      barWidth: 0,
     };
   }
 
   createArray = () => {
     const unsortedList = [];
-    let quantity = this.state.width / 48;
-
+    let quantity = 25;
+    let barWidth = (this.state.width - 200) / quantity;
+    barWidth = barWidth - 2;
+    let barMargin = "0 1px";
     for (let i = 0; i < quantity; i++) {
       unsortedList.push(getRandom(5, this.state.height - 100));
     }
-    this.setState({ unsortedList: unsortedList });
+    this.setState({
+      unsortedList: unsortedList,
+      barWidth: barWidth,
+      barMargin: barMargin,
+    });
+    console.log(this.state.barWidth);
   };
   renderArray() {
     return this.state.unsortedList.map((number, idx) => (
       <div
         className="visualiserArray"
         key={idx}
-        style={{ height: number }}
+        style={{
+          height: number,
+          width: this.state.barWidth,
+          margin: this.state.barMargin,
+          backgroundColor: babyBlue,
+        }}
       ></div>
     ));
   }
@@ -73,8 +88,8 @@ class App extends Component {
         const bar2Style = barArray[j + 1].style;
         /* Sets the color of the values being compared to blue */
         setTimeout(() => {
-          bar1Style.backgroundColor = "blue";
-          bar2Style.backgroundColor = "blue";
+          bar1Style.backgroundColor = "darkBlue";
+          bar2Style.backgroundColor = "darkBlue";
         }, l * animationSpeed);
         l++;
         /* swaps the values if the left one is larger than the right one*/
@@ -88,8 +103,8 @@ class App extends Component {
         l++;
         /* sets the bars color back to ping */
         setTimeout(() => {
-          bar1Style.backgroundColor = "pink";
-          bar2Style.backgroundColor = "pink";
+          bar1Style.backgroundColor = babyBlue;
+          bar2Style.backgroundColor = babyBlue;
         }, l * animationSpeed);
       }
     }
