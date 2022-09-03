@@ -134,26 +134,30 @@ class App extends Component {
   insertionSort() {
     let barArray = document.getElementsByClassName("visualiserArray");
     let l = 1;
+    const questionStartTimers = [];
     for (let i = 1; i < barArray.length; i++) {
+      questionStartTimers[i] = [];
       for (let j = i; j > 0; j--) {
         console.log("lol");
         const barArray1 = barArray[j].style;
         const barArray2 = barArray[j - 1].style;
         l++;
-        setTimeout(() => {
+        questionStartTimers[i][l] = setTimeout(() => {
           barArray1.backgroundColor = comparisonColor;
           barArray2.backgroundColor = comparisonColor;
         }, l * animationSpeed);
         l++;
-        setTimeout(() => {
+        questionStartTimers[i][l] = setTimeout(() => {
           if (parseInt(barArray1.height) < parseInt(barArray2.height)) {
             const temp = barArray1.height;
             barArray1.height = barArray2.height;
             barArray2.height = temp;
+          } else {
+            questionStartTimers[i].forEach((timer) => clearTimeout(timer));
           }
         }, l * 3);
         l++;
-        setTimeout(() => {
+        questionStartTimers[i][l] = setTimeout(() => {
           barArray1.backgroundColor = startColor;
           barArray2.backgroundColor = startColor;
         }, l * animationSpeed);
