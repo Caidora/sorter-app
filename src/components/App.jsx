@@ -4,6 +4,7 @@ import Navbar from "./navbar";
 const animationSpeed = 4;
 const startColor = "rgb(137, 207, 240)";
 const comparisonColor = "darkBlue";
+const quantity = 50;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +21,6 @@ class App extends Component {
 
   createArray = () => {
     const unsortedList = [];
-    let quantity = 50;
     let barWidth = (this.state.width - 200) / quantity;
     barWidth = barWidth - 2;
     let barMargin = "0 1px";
@@ -56,7 +56,6 @@ class App extends Component {
     let height = w.innerHeight - 10;
     const UnsortedList = this.state.unsortedList;
     let barMargin = "0 1px";
-    let quantity = 25;
     let barWidth = (this.state.width - 200) / quantity;
     barWidth = barWidth - 2;
     for (let i = 0; i < UnsortedList.length; i++) {
@@ -109,10 +108,13 @@ class App extends Component {
         const bar1Style = barArray[j].style;
         const bar2Style = barArray[j + 1].style;
         /* Sets the color of the values being compared to the comparisonColor */
-        setTimeout(() => {
-          bar1Style.backgroundColor = comparisonColor;
-          bar2Style.backgroundColor = comparisonColor;
-        }, l * animationSpeed);
+        setTimeout(
+          swapColor,
+          l * animationSpeed,
+          bar1Style,
+          bar2Style,
+          comparisonColor
+        );
         l++;
         /* swaps the values if the left one is larger than the right one*/
         setTimeout(() => {
@@ -124,10 +126,13 @@ class App extends Component {
         }, l * animationSpeed);
         l++;
         /* sets the bars color back to startColor */
-        setTimeout(() => {
-          bar1Style.backgroundColor = startColor;
-          bar2Style.backgroundColor = startColor;
-        }, l * animationSpeed);
+        setTimeout(
+          swapColor,
+          l * animationSpeed,
+          bar1Style,
+          bar2Style,
+          startColor
+        );
       }
     }
   }
@@ -141,10 +146,13 @@ class App extends Component {
         const barArray1 = barArray[j].style;
         const barArray2 = barArray[j - 1].style;
         l++;
-        questionStartTimers[i][l] = setTimeout(() => {
-          barArray1.backgroundColor = comparisonColor;
-          barArray2.backgroundColor = comparisonColor;
-        }, l * animationSpeed);
+        questionStartTimers[i][l] = setTimeout(
+          swapColor,
+          l * animationSpeed,
+          barArray1,
+          barArray2,
+          comparisonColor
+        );
         l++;
         /* performs swap, cancels future settimers if the insertion sort inserts the value
          */
@@ -154,16 +162,18 @@ class App extends Component {
             barArray1.height = barArray2.height;
             barArray2.height = temp;
           } else {
-            barArray1.backgroundColor = startColor;
-            barArray2.backgroundColor = startColor;
+            swapColor(barArray1, barArray2, startColor);
             questionStartTimers[i].forEach((timer) => clearTimeout(timer));
           }
         }, l * animationSpeed);
         l++;
-        questionStartTimers[i][l] = setTimeout(() => {
-          barArray1.backgroundColor = startColor;
-          barArray2.backgroundColor = startColor;
-        }, l * animationSpeed);
+        questionStartTimers[i][l] = setTimeout(
+          swapColor,
+          l * animationSpeed,
+          barArray1,
+          barArray2,
+          startColor
+        );
       }
     }
   }
@@ -171,5 +181,9 @@ class App extends Component {
 
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
+}
+function swapColor(bar1Style, bar2Style, Color) {
+  bar1Style.backgroundColor = Color;
+  bar2Style.backgroundColor = Color;
 }
 export default App;
