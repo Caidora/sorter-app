@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./navbar";
-const animationSpeed = 5;
+const animationSpeed = 4;
 const startColor = "rgb(137, 207, 240)";
 const comparisonColor = "darkBlue";
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
 
   createArray = () => {
     const unsortedList = [];
-    let quantity = 25;
+    let quantity = 50;
     let barWidth = (this.state.width - 200) / quantity;
     barWidth = barWidth - 2;
     let barMargin = "0 1px";
@@ -138,7 +138,6 @@ class App extends Component {
     for (let i = 1; i < barArray.length; i++) {
       questionStartTimers[i] = [];
       for (let j = i; j > 0; j--) {
-        console.log("lol");
         const barArray1 = barArray[j].style;
         const barArray2 = barArray[j - 1].style;
         l++;
@@ -147,6 +146,8 @@ class App extends Component {
           barArray2.backgroundColor = comparisonColor;
         }, l * animationSpeed);
         l++;
+        /* performs swap, cancels future settimers if the insertion sort inserts the value
+         */
         questionStartTimers[i][l] = setTimeout(() => {
           if (parseInt(barArray1.height) < parseInt(barArray2.height)) {
             const temp = barArray1.height;
