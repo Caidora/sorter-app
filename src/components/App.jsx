@@ -7,12 +7,14 @@ const comparisonColor = "darkBlue";
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       unsortedList: [],
       width: window.innerWidth,
       height: window.innerHeight,
       barMargin: 0,
       barWidth: 0,
+      startHeight: 0,
     };
   }
 
@@ -29,6 +31,7 @@ class App extends Component {
       unsortedList: unsortedList,
       barWidth: barWidth,
       barMargin: barMargin,
+      startHeight: this.state.height - 100,
     });
     console.log(this.state.barWidth);
   };
@@ -38,7 +41,7 @@ class App extends Component {
         className="visualiserArray"
         key={idx}
         style={{
-          height: number,
+          height: number * (this.state.height / this.state.startHeight),
           width: this.state.barWidth,
           margin: this.state.barMargin,
           backgroundColor: startColor,
@@ -51,18 +54,26 @@ class App extends Component {
     let width = w.innerWidth;
     let height = w.innerHeight;
 
-    this.setState({ width: width, height: height });
+    let barMargin = "0 1px";
+    let quantity = 25;
+    let barWidth = (this.state.width - 200) / quantity;
+    barWidth = barWidth - 2;
+
+    this.setState({
+      width: width,
+      height: height,
+      barWidth: barWidth,
+      barMargin: barMargin,
+    });
     console.log(this.state.width);
   };
 
   componentDidMount() {
     this.createArray();
     window.addEventListener("resize", this.updateDimensions);
-    window.addEventListener("resize", this.createArray);
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
-    window.removeEventListener("resize", this.createArray);
   }
   render() {
     return (
@@ -87,7 +98,7 @@ class App extends Component {
         l++;
         const bar1Style = barArray[j].style;
         const bar2Style = barArray[j + 1].style;
-        /* Sets the color of the values being compared to blue */
+        /* Sets the color of the values being compared to the comparisonColor */
         setTimeout(() => {
           bar1Style.backgroundColor = comparisonColor;
           bar2Style.backgroundColor = comparisonColor;
@@ -102,7 +113,7 @@ class App extends Component {
           }
         }, l * animationSpeed);
         l++;
-        /* sets the bars color back to ping */
+        /* sets the bars color back to startColor */
         setTimeout(() => {
           bar1Style.backgroundColor = startColor;
           bar2Style.backgroundColor = startColor;
