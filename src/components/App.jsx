@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./navbar";
-const animationSpeed = 3;
+const animationSpeed = 20;
 const startColor = "rgb(137, 207, 240)";
 const comparisonColor = "darkBlue";
 class App extends Component {
@@ -90,6 +90,7 @@ class App extends Component {
         <Navbar
           resetButton={this.createArray}
           bubbleButton={() => this.BubbleSort()}
+          insertionButton={() => this.insertionSort()}
         ></Navbar>
         <div className="visualiserContainer">{this.renderArray()}</div>
       </React.Fragment>
@@ -129,6 +130,40 @@ class App extends Component {
         }, l * animationSpeed);
       }
     }
+  }
+  insertionSort() {
+    let barArray = document.getElementsByClassName("visualiserArray");
+    let l = 0;
+    for (let i = 1; i < barArray.length; i++) {
+      let key = barArray[i].style.height;
+      let j = i - 1;
+      while (j >= 0 && parseInt(barArray[j].style.height) > parseInt(key)) {
+        l++;
+        const bar1Style = barArray[j].style;
+        const bar2Style = barArray[j + 1].style;
+        setTimeout(() => {
+          bar1Style.backgroundColor = comparisonColor;
+          bar2Style.backgroundColor = comparisonColor;
+        }, l * animationSpeed);
+        l++;
+        setTimeout(() => {
+          bar2Style.height = bar1Style.height;
+        }, l * animationSpeed);
+        l++;
+        setTimeout(() => {
+          bar1Style.backgroundColor = startColor;
+          bar2Style.backgroundColor = startColor;
+        }, l * animationSpeed);
+        j--;
+      }
+      l++;
+
+      let bar2Style = barArray[j + 1].style;
+      setTimeout(() => {
+        bar2Style.height = key;
+      }, l * animationSpeed);
+    }
+    console.log(barArray);
   }
 }
 function getRandom(min, max) {

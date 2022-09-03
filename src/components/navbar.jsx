@@ -19,8 +19,12 @@ class NavBar extends Component {
           >
             BubbleSort
           </button>
-          <button className="btn btn-outline-success" type="button">
-            Main button
+          <button
+            className="btn btn-outline-success"
+            type="button"
+            onClick={this.props.insertionButton}
+          >
+            InsertionSort
           </button>
           <button className="btn btn-outline-success" type="button">
             Main button
